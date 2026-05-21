@@ -1,0 +1,6 @@
+transaction_id,date,amount,description,category,account
+1,2026-05-01,1500.00,Versement salaire,Salaire,Compte courant
+2,2026-05-03,-45.50,Restaurant,Loisirs,Carte
+3,2026-05-05,-120.00,Facture électricité,Charges,Prélèvement
+4,2026-05-10,-9.99,Abonnement streaming,Abonnements,Carte
+5,2026-05-12,200.00,Virement ami,Autre,Compte épargne
