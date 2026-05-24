@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card shadow-sm mt-4">
+  <div class="card-body">
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3">
+        <div class="card text-white bg-success shadow-sm h-100">
+          <div class="card-body">
+            <h6 class="card-title text-uppercase">Total Revenus :</h6>
+            <h3 class="card-text fw-bold">
+              {{ total_revenus |floatformat:2 }} FCFA
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <div class="card text-white bg-danger shadow-sm h-100">
+          <div class="card-body">
+            <h6 class="card-title text-uppercase">Total Dépenses :</h6>
+            <h3 class="card-text fw-bold">
+              {{ total_depenses |floatformat:2 }} FCFA
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <div class="card text-white bg-primary shadow-sm h-100">
+          <div class="card-body">
+            <h6 class="card-title text-uppercase">Solde Actuel :</h6>
+            <h3 class="card-text fw-bold">{{ solde |floatformat:2 }} FCFA</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="text-primary mb-4">📊 Historique des Transactions</h2>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Date</th>
+            <th>Catégorie</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Montant (FCFA)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for transaction in transactions %}
+          <tr>
+            <td>{{ transaction.date_transaction|date:"d/m/Y" }}</td>
+            <td>{{ transaction.categorie.nom }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>
+              {% if transaction.type_transaction == 'REVENU' %}
+              <span class="badge bg-success">Revenu</span>
+              {% else %}
+              <span class="badge bg-danger">Dépense</span>
+              {% endif %}
+            </td>
+            <td class="fw-bold">{{ transaction.montant }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">
+              Aucune transaction trouvée.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
